@@ -1,0 +1,68 @@
+---
+title: "Massimiliano Ganci"
+subtitle: "MSc in Statistical Methods and Applications - Data Analyst (LM-82)"
+image: assets/foto_profilo.jpeg
+toc: false
+about:
+  id: hero-heading
+  template: solana
+  image-width: 11em
+  image-shape: rounded
+  links:
+    - icon: file-earmark-pdf
+      text: Scarica CV (PDF)
+      href: assets/Ganci_CV.pdf
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/massimiliano-ganci-a2b423417
+    - icon: github
+      text: GitHub
+      href: https://github.com/massimilianoganci
+    - icon: envelope
+      text: Email
+      href: mailto:massimiliano.ganci@gmail.com
+---
+
+::: {#hero-heading}
+:::
+
+::: cv-body
+## Chi sono
+
+Ciao, sono Massimiliano, un giovane neolaureato magistrale in statistica con una forte passione per i dati.
+
+Fin da bambino mi divertivo a prendere appunti su risultati, classifiche e statistiche degli sport che mi appassionavano di più, soprattutto il calcio e la Formula 1, costruendo tabelle, classifiche e analisi manualmente su fogli di carta sparsi.
+
+Nel tempo ho continuato a coltivare questa mia passione, usando spesso **Excel** come strumento pratico per organizzare la mia vita quotidiana, fino a trasformarla nel mio percorso universitario in Statistica e Data Analysis. Negli ultimi anni, invece, è aumentato il mio interesse per gli sviluppi tecnologici e le possibilità di automazione legate all'**AI** e agli **LLM**.
+
+Ho tanta voglia di mettermi in gioco come **Data Analyst**, applicando le mie competenze per analizzare fenomeni reali e problemi aziendali, comprenderli a fondo proponendo soluzioni concrete e policy decisionali.
+
+Questo portfolio è una raccolta dei principali progetti che ho sviluppato sia durante il mio percorso universitario che in maniera autonoma, un modo diretto per mostrare come lavoro, dall'esplorazione dei dati fino alla visualizzazione dei risultati finali.
+
+------------------------------------------------------------------------
+
+## I miei progetti
+
+-   [**Modello Spazio-Temporale per l'Affluenza Elettorale**](projects/voter-turnout-inla/index.qmd) — Stima bayesiana con `R-INLA` per isolare trend temporali e correlazione spaziale a livello territoriale.
+-   [**Riconoscimento Automatico di Frutta Ammuffita**](projects/moldy-fruit-cv/index.qmd) — Modello di Image Recognition per il controllo qualità, con analisi mirata alla riduzione dei falsi negativi.
+-   [**Data-Driven Portfolio Management**](projects/portfolio-management/index.qmd) — Strategia quantitativa di allocazione del capitale con backtesting e controllo del drawdown rispetto al benchmark.
+
+------------------------------------------------------------------------
+
+## Lingue
+
+-    <span class="fi fi-it"></span> **Italiano:** Madrelingua
+-    <span class="fi fi-gb"></span> **Inglese:** [B2 First (FCE) - Cambridge English Qualification](assets/Certificati/2019-First_Certificate_in_English_Level_B2.pdf){target="_blank"}
+-    <span class="fi fi-es"></span> **Spagnolo:** [DELE B1 - Diploma de Español como Lengua Extranjera](assets/Certificati/Certificato_Nivel_B1.pdf){target="_blank"}
+
+------------------------------------------------------------------------
+
+## Programmazione
+
+-   **RStudio** <i class="devicon-rstudio-plain colored"></i>
+-   **Excel & Pacchetto Office** <i class="bi bi-file-earmark-excel-fill" style="color: #217346;"></i>
+-   **Python** <i class="devicon-python-plain colored"></i>
+-   **MySQL & PostgreSQL** <i class="devicon-mysql-plain colored"></i><i class="devicon-postgresql-plain colored"></i>
+-   **MATLAB** <i class="devicon-matlab-plain colored"></i>
+-   **LaTeX** <i class="devicon-latex-original"></i>
+:::
