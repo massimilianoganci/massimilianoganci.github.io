@@ -89,24 +89,24 @@
 }
 
 /* --- COLORI INDIVIDUALI DEI 4 PULSANTI --- */
-.quarto-about-solana .about-entity .about-link[href$=".pdf"],
-.about-links .about-link[href$=".pdf"] {
-  background-color: #B91C1C;
-}
-
 .quarto-about-solana .about-entity .about-link[href*="linkedin"],
 .about-links .about-link[href*="linkedin"] {
   background-color: #0A66C2;
 }
 
-.quarto-about-solana .about-entity .about-link[href*="github"],
-.about-links .about-link[href*="github"] {
+.quarto-about-solana .about-entity .about-link[href*="github"]:not([href*=".pdf" i]),
+.about-links .about-link[href*="github"]:not([href*=".pdf" i]) {
   background-color: #24292F;
 }
 
 .quarto-about-solana .about-entity .about-link[href^="mailto:"],
 .about-links .about-link[href^="mailto:"] {
   background-color: #0F766E;
+}
+
+.quarto-about-solana .about-entity .about-link[href*=".pdf" i],
+.about-links .about-link[href*=".pdf" i] {
+  background-color: #B91C1C !important;
 }
 
 /* --- STILE LISTA SOFTWARE CON ICONE --- */
