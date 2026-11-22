@@ -1,6 +1,6 @@
 ---
 title: "Metodi Data-Driven per Gestione Portafoglio"
-subtitle: "Ottimizzazione Multi-Obiettivo (MOLIP) con metodo ε-Constraint e Analytic Hierarchy Process (AHP)"
+subtitle: "Ottimizzazione Multi-Obiettivo con metodo ε-Constraint e Analytic Hierarchy Process (AHP)"
 lang: it
 categories:
   - Python
