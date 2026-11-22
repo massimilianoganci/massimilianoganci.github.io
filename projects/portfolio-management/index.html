@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Metodi Data-Driven per Gestione Portafoglio – MY PORTFOLIO</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-cdb2236ad2057dc548cfdc0c8bb8c052.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nessun risultato",
+    "search-matching-documents-text": "documenti trovati",
+    "search-copy-link-title": "Copiare il link nella ricerca",
+    "search-hide-matches-text": "Nascondere i risultati aggiuntivi",
+    "search-more-match-text": "ci sono altri risultati in questo documento",
+    "search-more-matches-text": "ulteriori risultati in questo documento",
+    "search-clear-button-title": "Pulire",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancellare",
+    "search-submit-button-title": "Inviare",
+    "search-label": "Ricerca"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Vai al contenuto principale</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Sito web">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">MY PORTFOLIO</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Attiva/disattiva la navigazione" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-progetti" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Progetti</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-progetti">    
+        <li>
+    <a class="dropdown-item" href="../../projects/voter-turnout-inla/index.html">
+ <span class="dropdown-text">Dinamiche dell’Astensionismo in Italia</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../projects/moldy-fruit-cv/index.html">
+ <span class="dropdown-text">Automazione Riconoscimento Frutta Ammuffita</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../projects/portfolio-management/index.html">
+ <span class="dropdown-text">Data-Driven Portfolio Management</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/massimilianoganci"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/massimiliano-ganci-a2b423417"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:massimiliano.ganci@gmail.com"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Ricerca"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">In questa pagina</h2>
+   
+  <ul>
+  <li><a href="#in-sintesi" id="toc-in-sintesi" class="nav-link active" data-scroll-target="#in-sintesi">IN SINTESI:</a></li>
+  <li><a href="#il-problema-selezione-del-portafoglio-e-trade-off-rischio-rendimento" id="toc-il-problema-selezione-del-portafoglio-e-trade-off-rischio-rendimento" class="nav-link" data-scroll-target="#il-problema-selezione-del-portafoglio-e-trade-off-rischio-rendimento">Il problema: selezione del portafoglio e trade-off rischio-rendimento</a></li>
+  <li><a href="#dati-di-mercato-e-parametrizzazione-degli-asset" id="toc-dati-di-mercato-e-parametrizzazione-degli-asset" class="nav-link" data-scroll-target="#dati-di-mercato-e-parametrizzazione-degli-asset">Dati di mercato e parametrizzazione degli asset</a></li>
+  <li><a href="#metodologia-integrata-ottimizzazione-molip-e-ahp" id="toc-metodologia-integrata-ottimizzazione-molip-e-ahp" class="nav-link" data-scroll-target="#metodologia-integrata-ottimizzazione-molip-e-ahp">Metodologia integrata: Ottimizzazione MOLIP e AHP</a>
+  <ul class="collapse">
+  <li><a href="#fase-quantitativa-binary-knapsack-ed-varepsilon-constraint" id="toc-fase-quantitativa-binary-knapsack-ed-varepsilon-constraint" class="nav-link" data-scroll-target="#fase-quantitativa-binary-knapsack-ed-varepsilon-constraint">1. Fase quantitativa: Binary Knapsack ed <span class="math inline">\(\varepsilon\)</span>-Constraint</a></li>
+  <li><a href="#fase-decisionale-analytic-hierarchy-process-ahp" id="toc-fase-decisionale-analytic-hierarchy-process-ahp" class="nav-link" data-scroll-target="#fase-decisionale-analytic-hierarchy-process-ahp">2. Fase decisionale: Analytic Hierarchy Process (AHP)</a></li>
+  </ul></li>
+  <li><a href="#risultati-finali" id="toc-risultati-finali" class="nav-link" data-scroll-target="#risultati-finali">Risultati finali</a>
+  <ul class="collapse">
+  <li><a href="#frontiera-di-pareto-dominanza-settoriale-e-vincolo-di-diversificazione" id="toc-frontiera-di-pareto-dominanza-settoriale-e-vincolo-di-diversificazione" class="nav-link" data-scroll-target="#frontiera-di-pareto-dominanza-settoriale-e-vincolo-di-diversificazione">1. Frontiera di Pareto, dominanza settoriale e vincolo di diversificazione</a></li>
+  <li><a href="#ranking-decisionale-tramite-analytic-hierarchy-process-ahp" id="toc-ranking-decisionale-tramite-analytic-hierarchy-process-ahp" class="nav-link" data-scroll-target="#ranking-decisionale-tramite-analytic-hierarchy-process-ahp">2. Ranking decisionale tramite Analytic Hierarchy Process (AHP)</a></li>
+  <li><a href="#analisi-di-sensitività-e-dominanza-del-ranking" id="toc-analisi-di-sensitività-e-dominanza-del-ranking" class="nav-link" data-scroll-target="#analisi-di-sensitività-e-dominanza-del-ranking">3. Analisi di sensitività e dominanza del ranking</a></li>
+  <li><a href="#conclusioni-e-valore-manageriale-del-framework" id="toc-conclusioni-e-valore-manageriale-del-framework" class="nav-link" data-scroll-target="#conclusioni-e-valore-manageriale-del-framework">4. Conclusioni e valore manageriale del framework</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metodi Data-Driven per Gestione Portafoglio</h1>
+<p class="subtitle lead">Ottimizzazione Multi-Obiettivo (MOLIP) con metodo ε-Constraint e Analytic Hierarchy Process (AHP)</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Python</div>
+    <div class="quarto-category">Ricerca Operativa</div>
+    <div class="quarto-category">Ottimizzazione Multi-Obiettivo</div>
+    <div class="quarto-category">AHP</div>
+    <div class="quarto-category">Portfolio Management</div>
+    <div class="quarto-category">Decision Making</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="project-links">
+<p><a href="https://github.com/massimilianoganci/NOME-REPO-PORTFOLIO" class="btn-proj-primary" target="_blank"><i class="bi bi-github"></i> Codice su GitHub</a> <a href="../../assets/PORTFOLIO/Final_Project.pdf" class="btn-proj-secondary" target="_blank"><i class="bi bi-file-earmark-pdf"></i> Report Completo (PDF)</a></p>
+</div>
+<section id="in-sintesi" class="level3 exec-summary">
+<h3 class="anchored" data-anchor-id="in-sintesi">IN SINTESI:</h3>
+<p>In questo progetto sviluppo un framework decisionale integrato in due fasi che combina il rigore quantitativo della <strong>Programmazione Lineare Intera Multi-Obiettivo (MOLIP)</strong> con la flessibilità strategica dell’<strong>Analytic Hierarchy Process (AHP)</strong>.</p>
+<p>Su un dataset reale di <strong>30 asset azionari</strong> distribuiti in <strong>6 settori</strong> (2 anni di serie storiche, 504 giorni di trading), il modello genera la Frontiera di Pareto esatta e classifica le migliori alternative tramite valutazione multicriterio e analisi di sensitività.</p>
+<p><strong>I Risultati chiave:</strong></p>
+<ul>
+<li><p><strong>Frontiera di Pareto esatta</strong> (44 soluzioni): l’algoritmo <em><span class="math inline">\(\varepsilon\)</span>-Constraint</em> risolto con il solver <strong>COIN-OR Branch-and-Cut (<code>CBC</code>)</strong> sotto vincoli di budget (<strong>1.000 $</strong>) e rischio massimo (<strong>2.000 MAD</strong>) identifica 44 portafogli non dominati, con netta prevalenza dei settori <strong>Consumer (65,9%)</strong> e <strong>Finance (52,3%)</strong>, mentre <strong>Energy</strong> non compare mai <strong>(0%)</strong>.</p></li>
+<li><p><strong>Impatto della diversificazione (<span class="math inline">\(N \ge 3\)</span>):</strong> il modello non vincolato concentra il capitale su un solo titolo (<strong>GE</strong>, iterazione 21); introducendo il vincolo di almeno 3 asset, le iterazioni <strong>12</strong> (<code>BAC, WMT, GE</code>, rendimento <strong>263,14 $</strong>) e <strong>14</strong> (<code>PFE, WMT, GE</code>, rendimento <strong>246,47 $</strong>) raggiungono lo <em>sweet spot</em> (~80% del rendimento massimo con ~30% di rischio in meno).</p></li>
+<li><p><strong>Portfolio Bilanciato Vincitore:</strong> classificando tre candidati Pareto-ottimali (<span class="math inline">\(P_1\)</span> Aggressivo, <span class="math inline">\(P_{12}\)</span> Bilanciato, <span class="math inline">\(P_{31}\)</span> Difensivo) su <strong>3 macro-criteri e 8 sub-criteri</strong>, il portafoglio bilanciato <strong><span class="math inline">\(P_{12}\)</span></strong> prevale nettamente con uno score globale del <strong>52,82%</strong> (contro 24,75% di <span class="math inline">\(P_{31}\)</span> e 22,43% di <span class="math inline">\(P_1\)</span>).</p></li>
+<li><p><strong>Robustezza alla sensitività:</strong> variando dinamicamente i pesi dei macro-criteri, <span class="math inline">\(P_{12}\)</span> domina <span class="math inline">\(P_1\)</span> nel <strong>100%</strong> degli scenari e supera <span class="math inline">\(P_{31}\)</span> nel <strong>65%</strong> degli scenari su <em>Value</em> e nel <strong>69%</strong> su <em>Variability</em>.</p></li>
+</ul>
+<p><strong>Strumenti utilizzati:</strong> <code>Python</code>, <code>yfinance</code>, <code>PuLP / COIN-OR CBC</code>, <code>NumPy</code>, <code>Pandas</code>, <code>Matplotlib</code>.</p>
+</section>
+<hr>
+<section id="il-problema-selezione-del-portafoglio-e-trade-off-rischio-rendimento" class="level2">
+<h2 class="anchored" data-anchor-id="il-problema-selezione-del-portafoglio-e-trade-off-rischio-rendimento">Il problema: selezione del portafoglio e trade-off rischio-rendimento</h2>
+<p>Nel <em>Project Portfolio Management</em>, a differenza dell’allocazione finanziaria frazionaria classica, le decisioni di investimento hanno natura binaria: ogni progetto o asset candidato <span class="math inline">\(i \in \{1, \dots, n\}\)</span> può essere interamente selezionato (<span class="math inline">\(x_i = 1\)</span>) oppure escluso (<span class="math inline">\(x_i = 0\)</span>). Il problema assume quindi la struttura di un <strong>Binary Knapsack Problem multi-obiettivo</strong>, in cui occorre bilanciare la massimizzazione del <strong>Rendimento Totale atteso</strong> e minimizzare l’<strong>Esposizione Totale al Rischio</strong> andando a rispettare i vincoli di budget e di tolleranza al rischio.</p>
+<p>In un contesto multi-obiettivo non esiste un’unica soluzione ottima in senso assoluto, ma un insieme di soluzioni non dominate (<strong>Frontiera di Pareto</strong>), in cui nessun obiettivo può essere migliorato senza peggiorare l’altro. Per risolvere sia la complessità combinatoria sia il dilemma della scelta finale tra soluzioni matematicamente equivalenti sulla frontiera, il lavoro integra due metodologie complementari:</p>
+<ol type="1">
+<li><strong>Fase quantitativa (MOLIP + <span class="math inline">\(\varepsilon\)</span>-Constraint):</strong> filtra lo spazio combinatorio (<span class="math inline">\(2^{30}\)</span> combinazioni possibili) estraendo il nucleo esatto di portafogli Pareto-ottimali.</li>
+<li><strong>Fase qualitativa-strategica (AHP):</strong> applicata <em>a posteriori</em> su una rosa ristretta di portafogli efficienti, permette di incorporare preferenze decisionali, giudizi esperti e fattori non puramente numerici (come liquidità, conformità normativa ed ESG).</li>
+</ol>
+<hr>
+</section>
+<section id="dati-di-mercato-e-parametrizzazione-degli-asset" class="level2">
+<h2 class="anchored" data-anchor-id="dati-di-mercato-e-parametrizzazione-degli-asset">Dati di mercato e parametrizzazione degli asset</h2>
+<p>Per costruire un banco di prova realistico sono stati estratti da <strong>Yahoo Finance</strong> (tramite la libreria Python <code>yfinance</code>) i dati storici di <strong>30 titoli azionari</strong> lungo un orizzonte di <strong>2 anni</strong> (<strong>504 giorni di trading</strong>, <span class="math inline">\(t = 1, \dots, 504\)</span>), suddivisi in <strong>6 settori economici</strong>: <em>Tech</em> (10), <em>Consumer</em> (7), <em>Finance</em> (5), <em>Healthcare</em> (4), <em>Energy</em> (2) e <em>Industrial</em> (2). Questa classificazione consente di verificare se portafogli più prudenti tendano a privilegiare settori difensivi rispetto a comparti più volatili.</p>
+<p>Per ciascun asset <span class="math inline">\(i\)</span> sono stati definiti tre parametri annualizzati su 252 giorni lavorativi:</p>
+<ul>
+<li><strong>Costo (<span class="math inline">\(w_i\)</span>):</strong> ultimo prezzo di chiusura registrato nella serie storica.</li>
+<li><strong>Rendimento Atteso (<span class="math inline">\(r_i\)</span>):</strong> rendimento percentuale giornaliero medio <span class="math inline">\(R_{i,t}\)</span> annualizzato e convertito in valore monetario: <span class="math display">\[
+r_i = \left(\frac{1}{T}\sum_{t=1}^{T} R_{i,t}\right) \cdot 252 \cdot w_i
+\]</span></li>
+<li><strong>Risk Score (<span class="math inline">\(k_i\)</span>):</strong> <em>Mean Absolute Deviation</em> (<strong>MAD</strong>) annualizzata in termini monetari — uno score di 1.000 implica una fluttuazione cumulativa media di 1.000 $ rispetto al trend medio annuo: <span class="math display">\[
+k_i = \left(\frac{1}{T}\sum_{t=1}^{T} \left|R_{i,t} - \overline{R}_i\right|\right) \cdot 252 \cdot w_i
+\]</span></li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Settore</th>
+<th style="text-align: center;">Costo medio (<span class="math inline">\(w_i\)</span>, $)</th>
+<th style="text-align: center;">Rendimento atteso medio (<span class="math inline">\(r_i\)</span>, $)</th>
+<th style="text-align: center;">Risk Score medio (<span class="math inline">\(k_i\)</span>, MAD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Industrial</strong></td>
+<td style="text-align: center;">445,82</td>
+<td style="text-align: center;"><strong>211,54</strong></td>
+<td style="text-align: center;">1.459,39</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Finance</strong></td>
+<td style="text-align: center;">441,75</td>
+<td style="text-align: center;">150,96</td>
+<td style="text-align: center;">1.153,04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tech</strong></td>
+<td style="text-align: center;">230,54</td>
+<td style="text-align: center;">77,14</td>
+<td style="text-align: center;">836,71</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Consumer</strong></td>
+<td style="text-align: center;">242,92</td>
+<td style="text-align: center;">29,80</td>
+<td style="text-align: center;">552,82</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Energy</strong></td>
+<td style="text-align: center;">133,76</td>
+<td style="text-align: center;">12,71</td>
+<td style="text-align: center;"><strong>339,95</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Healthcare</strong></td>
+<td style="text-align: center;">165,36</td>
+<td style="text-align: center;">0,01</td>
+<td style="text-align: center;">492,60</td>
+</tr>
+</tbody>
+</table>
+<p>Le statistiche descrittive evidenziano già una chiara polarizzazione settoriale: <strong>Healthcare</strong> ed <strong>Energy</strong> offrono i profili di rischio più bassi ma con rendimenti medi molto modesti, mentre <strong>Industrial</strong> e <strong>Finance</strong> presentano il potenziale di rendimento più elevato a fronte di una volatilità nettamente superiore.</p>
+<hr>
+</section>
+<section id="metodologia-integrata-ottimizzazione-molip-e-ahp" class="level2">
+<h2 class="anchored" data-anchor-id="metodologia-integrata-ottimizzazione-molip-e-ahp">Metodologia integrata: Ottimizzazione MOLIP e AHP</h2>
+<section id="fase-quantitativa-binary-knapsack-ed-varepsilon-constraint" class="level3">
+<h3 class="anchored" data-anchor-id="fase-quantitativa-binary-knapsack-ed-varepsilon-constraint">1. Fase quantitativa: Binary Knapsack ed <span class="math inline">\(\varepsilon\)</span>-Constraint</h3>
+<p>Adottando funzioni obiettivo lineari, il modello bi-obiettivo viene riformulato tramite il <strong>metodo <span class="math inline">\(\varepsilon\)</span>-Constraint</strong>: a ogni iterazione <span class="math inline">\(j\)</span> si massimizza il rendimento totale imponendo un tetto decrescente <span class="math inline">\(\varepsilon_j\)</span> sul rischio cumulato, risolvendo il sottoproblema <span class="math inline">\(\mathcal{P}(\varepsilon_j)\)</span>:</p>
+<p><span class="math display">\[
+\max \sum_{i=1}^{30} r_i x_i \qquad \text{soggetto a} \qquad
+\begin{cases}
+\sum_{i=1}^{30} w_i x_i \le W_{\max} = 1.000 \, \$ \\
+\sum_{i=1}^{30} k_i x_i \le \varepsilon_j \le R_{\max} = 2.000 \\
+x_i \in \{0, 1\} \quad \forall i = 1, \dots, 30
+\end{cases}
+\]</span></p>
+<p>Poiché l’enumerazione esaustiva di <span class="math inline">\(2^{30}\)</span> combinazioni è computazionalmente impraticabile, ogni istanza è risolta all’ottimo globale tramite il solver <strong>COIN-OR Branch-and-Cut (<code>CBC</code>)</strong>, che esplora l’albero delle soluzioni potando i rami sub-ottimali tramite rilassamenti lineari. La procedura parte massimizzando il solo rendimento (Step 0) e restringe progressivamente <span class="math inline">\(\varepsilon_j\)</span> strettamente al di sotto del rischio ottenuto all’iterazione precedente fino a esaurire le soluzioni ammissibili.</p>
+</section>
+<section id="fase-decisionale-analytic-hierarchy-process-ahp" class="level3">
+<h3 class="anchored" data-anchor-id="fase-decisionale-analytic-hierarchy-process-ahp">2. Fase decisionale: Analytic Hierarchy Process (AHP)</h3>
+<p>Per ordinare i portafogli Pareto-ottimali selezionati secondo preferenze strategiche strutturate, è stato implementato un <strong>AHP a due livelli</strong> composto da <strong>3 macro-criteri</strong> e <strong>8 sub-criteri</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/PORTFOLIO/hierarchy.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Struttura Gerarchica Completa AHP</figcaption>
+</figure>
+</div>
+<p>A partire dalle matrici di confronto a coppie <span class="math inline">\(A = (a_{ij})\)</span> compilate sulla <strong>scala di Saaty (1–9)</strong>, i vettori di priorità normalizzati <span class="math inline">\(w\)</span> sono ottenuti risolvendo il problema agli autovalori <span class="math inline">\(A w = \lambda_{\max} w\)</span>, mentre i punteggi globali delle alternative derivano dall’aggregazione lineare pesata <span class="math inline">\(S(a_i) = \sum_k w_k \, s_k(a_i)\)</span>. Infine, per testare la tenuta del ranking rispetto alla soggettività dei giudizi, è stata condotta una <strong>sensitivity analysis dinamica</strong> facendo variare l’intero intervallo dei pesi dei tre macro-criteri.</p>
+<hr>
+</section>
+</section>
+<section id="risultati-finali" class="level2">
+<h2 class="anchored" data-anchor-id="risultati-finali">Risultati finali</h2>
+<section id="frontiera-di-pareto-dominanza-settoriale-e-vincolo-di-diversificazione" class="level3">
+<h3 class="anchored" data-anchor-id="frontiera-di-pareto-dominanza-settoriale-e-vincolo-di-diversificazione">1. Frontiera di Pareto, dominanza settoriale e vincolo di diversificazione</h3>
+<p>L’algoritmo <span class="math inline">\(\varepsilon\)</span>-Constraint genera esattamente <strong>44 portafogli Pareto-ottimali</strong>, che spaziano dal portafoglio a massimo rendimento (<code>Iter 1: JPM, PFE, GE</code> con rendimento <strong>322,53 $</strong> e rischio <strong>1.959,19</strong>) fino al portafoglio difensivo minimo (<code>Iter 44: PFE</code> con rendimento <strong>0,90 $</strong> e rischio <strong>72,93</strong>).</p>
+<p>Analizzando la frequenza dei settori lungo le 44 soluzioni efficienti emergono due titoli pilastro — <strong>GE Aerospace (<code>GE</code>)</strong> e <strong>Walmart (<code>WMT</code>)</strong> — e una chiara gerarchia settoriale: <strong>Consumer</strong> compare nel <strong>65,9%</strong> dei portafogli (29/44), <strong>Finance</strong> nel <strong>52,3%</strong> (23/44), <strong>Industrials</strong> nel <strong>47,7%</strong> (21/44), <strong>Tech</strong> nel <strong>43,2%</strong> (19/44) e <strong>Healthcare</strong> nel <strong>36,4%</strong> (16/44), mentre <strong>Energy</strong> viene completamente dominato (0%).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Scenario</th>
+<th style="text-align: left;">Criterio di Selezione</th>
+<th style="text-align: center;">Iterazione</th>
+<th style="text-align: left;">Composizione</th>
+<th style="text-align: center;">Rendimento ($)</th>
+<th style="text-align: center;">Rischio (MAD)</th>
+<th style="text-align: center;">Valore Metrica</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Senza vincolo</strong></td>
+<td style="text-align: left;">Min Distance &amp; Max Efficiency</td>
+<td style="text-align: center;"><strong>21</strong></td>
+<td style="text-align: left;"><code>GE</code></td>
+<td style="text-align: center;">198,28</td>
+<td style="text-align: center;">1.058,81</td>
+<td style="text-align: center;">Dist: 0,6499 / Eff: 0,1873</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Senza vincolo</strong></td>
+<td style="text-align: left;">Max Utility (<span class="math inline">\(\lambda = 0,10\)</span>)</td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: left;"><code>JPM, GE</code></td>
+<td style="text-align: center;">321,63</td>
+<td style="text-align: center;">1.886,27</td>
+<td style="text-align: center;">Util: 133,00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Senza vincolo</strong></td>
+<td style="text-align: left;">Max Utility (<span class="math inline">\(\lambda = 0,15\)</span>)</td>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: left;"><code>WMT, GE</code></td>
+<td style="text-align: center;">245,57</td>
+<td style="text-align: center;">1.323,38</td>
+<td style="text-align: center;">Util: 47,06</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Diversificato (<span class="math inline">\(N \ge 3\)</span>)</strong></td>
+<td style="text-align: left;"><strong>Max Efficiency &amp; Util (<span class="math inline">\(\lambda = 0,15\)</span>)</strong></td>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: left;"><code>BAC, WMT, GE</code></td>
+<td style="text-align: center;"><strong>263,14</strong></td>
+<td style="text-align: center;"><strong>1.475,39</strong></td>
+<td style="text-align: center;"><strong>Eff: 0,1784</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Diversificato (<span class="math inline">\(N \ge 3\)</span>)</strong></td>
+<td style="text-align: left;"><strong>Min Distance</strong></td>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;"><code>PFE, WMT, GE</code></td>
+<td style="text-align: center;"><strong>246,47</strong></td>
+<td style="text-align: center;"><strong>1.396,31</strong></td>
+<td style="text-align: center;"><strong>Dist: 0,6801</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Diversificato (<span class="math inline">\(N \ge 3\)</span>)</strong></td>
+<td style="text-align: left;">Max Utility (<span class="math inline">\(\lambda = 0,01\)</span>)</td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: left;"><code>JPM, PFE, GE</code></td>
+<td style="text-align: center;">322,53</td>
+<td style="text-align: center;">1.959,19</td>
+<td style="text-align: center;">Util: 302,94</td>
+</tr>
+</tbody>
+</table>
+<p>Senza vincoli di cardinalità, sia la minima distanza sia la massima efficienza selezionano il singolo titolo <code>GE</code> (iterazione 21, corrispondente al salto verticale più ampio sulla frontiera). L’introduzione del vincolo di diversificazione (<span class="math inline">\(N \ge 3\)</span>) elimina il rischio di concentrazione spostando l’ottimo sulle <strong>iterazioni 12 e 14</strong>, che catturano circa l’<strong>80% del rendimento massimo</strong> abbattendo il rischio di quasi il <strong>30%</strong>.</p>
+</section>
+<section id="ranking-decisionale-tramite-analytic-hierarchy-process-ahp" class="level3">
+<h3 class="anchored" data-anchor-id="ranking-decisionale-tramite-analytic-hierarchy-process-ahp">2. Ranking decisionale tramite Analytic Hierarchy Process (AHP)</h3>
+<p>Dalla frontiera diversificata sono stati selezionati tre profili rappresentativi da sottoporre alla valutazione AHP:</p>
+<ul>
+<li><strong><span class="math inline">\(P_1\)</span> — Aggressivo (<code>Iter 1</code>):</strong> <code>[JPM, PFE, GE]</code> — orientato alla massimizzazione del rendimento.</li>
+<li><strong><span class="math inline">\(P_{12}\)</span> — Bilanciato:</strong> profilo intermedio centrato sul trade-off rendimento/rischio (<code>WMT</code>, <code>GE</code> + componente difensiva/finanziaria).</li>
+<li><strong><span class="math inline">\(P_{31}\)</span> — Difensivo (<code>Iter 31</code>):</strong> <code>[CSCO, BAC, WMT]</code> — focalizzato sul contenimento del rischio (rendimento <strong>86,34 $</strong>, rischio <strong>595,26</strong>).</li>
+</ul>
+<p>L’immagine di seguito evidenzia la vittoria netta del portafoglio bilanciato, dopo l’aggregazione dei pesi globali.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/PORTFOLIO/download (12).png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Confronto dei Global Priority Score assegnati dall’AHP ai tre portafogli Pareto-ottimali selezionati.</figcaption>
+</figure>
+</div>
+</section>
+<section id="analisi-di-sensitività-e-dominanza-del-ranking" class="level3">
+<h3 class="anchored" data-anchor-id="analisi-di-sensitività-e-dominanza-del-ranking">3. Analisi di sensitività e dominanza del ranking</h3>
+<p>Per verificare che la scelta di <span class="math inline">\(P_{12}\)</span> non dipenda in modo fragile da una singola combinazione di pesi soggettivi, è stata condotta una <strong>sensitivity analysis</strong> variando il peso di ciascun macro-criterio da <span class="math inline">\(0\)</span> a <span class="math inline">\(1\)</span> e misurando la percentuale di dominanza a coppie tra i portafogli:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Macro-Criterio variato (<em>Sweep</em>)</th>
+<th style="text-align: center;">Dominanza <span class="math inline">\(P_{12}\)</span> su <span class="math inline">\(P_1\)</span></th>
+<th style="text-align: center;">Dominanza <span class="math inline">\(P_{12}\)</span> su <span class="math inline">\(P_{31}\)</span></th>
+<th style="text-align: center;">Dominanza <span class="math inline">\(P_{31}\)</span> su <span class="math inline">\(P_1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Value</strong> <em>(peso base = 0,74)</em></td>
+<td style="text-align: center;"><strong>100%</strong></td>
+<td style="text-align: center;"><strong>65%</strong></td>
+<td style="text-align: center;">77%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Variability</strong></td>
+<td style="text-align: center;"><strong>100%</strong></td>
+<td style="text-align: center;"><strong>69%</strong></td>
+<td style="text-align: center;">88%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>External Factors</strong></td>
+<td style="text-align: center;"><strong>100%</strong></td>
+<td style="text-align: center;">47%</td>
+<td style="text-align: center;">94%</td>
+</tr>
+</tbody>
+</table>
+<p>I grafici di sensitività evidenziano un risultato strutturale molto chiaro:</p>
+<ul>
+<li><strong><span class="math inline">\(P_{12}\)</span> (Balanced) domina strettamente <span class="math inline">\(P_1\)</span> nel 100% degli scenari</strong> su tutti e tre i macro-criteri, risultando l’opzione più robusta nell’intero intervallo realistico di preferenze.</li>
+<li><strong><span class="math inline">\(P_{31}\)</span> (Defensive)</strong> supera <span class="math inline">\(P_{12}\)</span> solo in scenari estremi — ossia quando il peso di <em>External Factors</em> supera la metà della decisione (53% di dominanza complessiva) oppure quando il peso di <em>Value</em> scende sotto ~0,35 — ma viene penalizzato fortemente rispetto al criterio principale (<em>Value</em>).</li>
+<li><strong><span class="math inline">\(P_1\)</span> (Aggressive)</strong> si conferma strategicamente fragile: non raggiunge mai la prima posizione in nessuno degli scenari e supera persino <span class="math inline">\(P_{31}\)</span> soltanto quando il peso attribuito a <em>Value</em> supera ~0,77 (23% dello sweep).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/PORTFOLIO/download (15).png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Analisi di sensitività e matrici di dominanza del ranking AHP al variare dei pesi di Value, Variability ed External Factors.</figcaption>
+</figure>
+</div>
+</section>
+<section id="conclusioni-e-valore-manageriale-del-framework" class="level3">
+<h3 class="anchored" data-anchor-id="conclusioni-e-valore-manageriale-del-framework">4. Conclusioni e valore manageriale del framework</h3>
+<p>Il progetto dimostra l’efficacia di un approccio <strong>ibrido quantitativo–decisionale</strong> nel <em>Project Portfolio Management</em>:</p>
+<ul>
+<li>La <strong>Programmazione Lineare Intera Multi-Obiettivo (MOLIP)</strong> tramite <em><span class="math inline">\(\varepsilon\)</span>-Constraint</em> elimina le combinazioni inefficienti e garantisce soluzioni matematicamente ottimali, ma da sola restituisce decine di portafogli formalmente equivalenti e rischia di favorire allocazioni eccessivamente concentrate senza vincoli espliciti di diversificazione.</li>
+<li>L’<strong>Analytic Hierarchy Process (AHP)</strong>, applicato a valle del filtraggio di Pareto e validato tramite <em>sensitivity analysis</em>, risolve il dilemma decisionale integrando governance, sostenibilità (ESG) e tolleranza al rischio, individuando in <strong><span class="math inline">\(P_{12}\)</span> (Balanced)</strong> il compromesso più stabile e difendibile (score globale <strong>52,82%</strong>).</li>
+</ul>
+<p>In ottica di estensione futura, il framework può essere facilmente arricchito introducendo vincoli di diversificazione settoriale massima, metriche di rischio non lineari (es. covarianza o CVaR) e giudizi AHP aggregati da un panel multi-decisore con verifica esplicita del <em>Consistency Ratio</em> (CR).</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiato!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiato!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Codice scorrevole","output":"Uscita scorrevole"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
