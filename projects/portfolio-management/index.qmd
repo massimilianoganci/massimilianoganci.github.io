@@ -120,9 +120,11 @@ Analizzando la frequenza dei settori lungo le 44 soluzioni efficienti emergono d
 | **Senza vincolo** | Min Distance & Max Efficiency | **21** | `GE` | 198,28 | 1.058,81 | Dist: 0,6499 / Eff: 0,1873 |
 | **Senza vincolo** | Max Utility ($\lambda = 0,10$) | **2** | `JPM, GE` | 321,63 | 1.886,27 | Util: 133,00 |
 | **Senza vincolo** | Max Utility ($\lambda = 0,15$) | **15** | `WMT, GE` | 245,57 | 1.323,38 | Util: 47,06 |
-| **Diversificato ($N \ge 3$)** | **Max Efficiency & Util ($\lambda = 0,15$)** | **12** | `BAC, WMT, GE` | **263,14** | **1.475,39** | **Eff: 0,1784** |
+| **Diversificato ($N \ge 3$)** | **Max Efficiency & Util      ($\lambda = 0,15$)** | **12** | `BAC, WMT, GE` | **263,14** | **1.475,39** | **Eff: 0,1784** |
 | **Diversificato ($N \ge 3$)** | **Min Distance** | **14** | `PFE, WMT, GE` | **246,47** | **1.396,31** | **Dist: 0,6801** |
 | **Diversificato ($N \ge 3$)** | Max Utility ($\lambda = 0,01$) | **1** | `JPM, PFE, GE` | 322,53 | 1.959,19 | Util: 302,94 |
+
+: {tbl-colwidths="[15, 20, 9, 13, 10, 10, 13]"}
 
 Senza vincoli di cardinalità, sia la minima distanza sia la massima efficienza selezionano il singolo titolo `GE` (iterazione 21, corrispondente al salto verticale più ampio sulla frontiera). L'introduzione del vincolo di diversificazione ($N \ge 3$) elimina il rischio di concentrazione spostando l'ottimo sulle **iterazioni 12 e 14**, che catturano circa l'**80% del rendimento massimo** abbattendo il rischio di quasi il **30%**.
 
@@ -145,7 +147,7 @@ Per verificare che la scelta di $P_{12}$ non dipenda in modo fragile da una sing
 
 | Macro-Criterio variato (*Sweep*) | Dominanza $P_{12}$ su $P_1$ | Dominanza $P_{12}$ su $P_{31}$ | Dominanza $P_{31}$ su $P_1$ |
 | :--- | :---: | :---: | :---: |
-| **Value** *(peso base = 0,74)* | **100%** | **65%** | 77% |
+| **Value** | **100%** | **65%** | 77% |
 | **Variability** | **100%** | **69%** | 88% |
 | **External Factors** | **100%** | 47% | 94% |
 
