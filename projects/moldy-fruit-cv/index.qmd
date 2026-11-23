@@ -15,7 +15,6 @@ code-summary: "Mostra il codice Python"
 ---
 
 ::: {.project-links}
-[<i class="bi bi-github"></i> Codice su GitHub](https://github.com/massimilianoganci/NOME-REPO-FRUTTA){.btn-proj-primary target="_blank"}
 [<i class="bi bi-file-earmark-pdf"></i> Report Completo (PDF)](/assets/FRUIT/Report_Fruits.pdf){.btn-proj-secondary target="_blank"}
 :::
 
