@@ -11,7 +11,7 @@ about:
   links:
     - icon: file-earmark-pdf
       text: Scarica CV (PDF)
-      href: assets/Ganci_CV.pdf
+      href: assets/Ganci_CV_2026.pdf
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/massimiliano-ganci-a2b423417
